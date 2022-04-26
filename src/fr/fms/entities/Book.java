@@ -1,22 +1,37 @@
 package fr.fms.entities;
 
-import java.util.Date;
-
 public class Book {
 	private int id;
 	private String title;
 	private String author;
-	private Date publishYearDate;
+	private int publishYearDate;
 	private int quantity = 1;
 	private double price;
 	private boolean state; // true = new - false = old
 
-	public Book(int id, String title, String author, Date publishYearDate, int quantity, double price, boolean state) {
+	public Book(int id, String title, String author, int publishYearDate, int quantity, double price, boolean state) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.publishYearDate = publishYearDate;
-		this.quantity = quantity;
+		setQuantity(quantity);
+		this.price = price;
+		this.state = state;
+	}
+	
+	public Book(String title, String author, int publishYearDate, int quantity, double price, boolean state) {
+		this.title = title;
+		this.author = author;
+		this.publishYearDate = publishYearDate;
+		setQuantity(quantity);
+		this.price = price;
+		this.state = state;
+	}
+	
+	public Book(String title, String author, int publishYearDate, double price, boolean state) {
+		this.title = title;
+		this.author = author;
+		this.publishYearDate = publishYearDate;
 		this.price = price;
 		this.state = state;
 	}
@@ -51,11 +66,11 @@ public class Book {
 		this.author = author;
 	}
 
-	public Date getPublishYearDate() {
+	public int getPublishYearDate() {
 		return publishYearDate;
 	}
 
-	public void setPublishYearDate(Date publishYearDate) {
+	public void setPublishYearDate(int publishYearDate) {
 		this.publishYearDate = publishYearDate;
 	}
 
