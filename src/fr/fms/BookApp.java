@@ -22,13 +22,13 @@ public class BookApp {
 				displayMenu();
 				switch (choice = input()) {
 				case 1:
-					System.out.println("addArticle()");
+					addBook();
 					break;
 				case 2:
-					System.out.println("removeArticle()");
+					removeBook();
 					break;
 				case 3:
-					System.out.println("displayCart()");
+					displayCart();
 					break;
 				case 4:
 					displayBooks();
@@ -64,6 +64,53 @@ public class BookApp {
 		System.out.println("[6] - Afficher les articles par thématique");
 		System.out.println("[7] - Connexion à votre compte");
 		System.out.println("[8] - Quitter l'application");
+	}
+
+	public static void addBook() {
+		displayBooks();
+		System.out.println("Saisissez l'ID du livre à ajouter au panier");
+		int id = input();
+		Book book = bookJob.getOneBook(id);
+
+		if (book != null) {
+			bookJob.addToCart(book);
+			displayCart();
+		} else {
+			throw new RuntimeException("*** Vous demandez un livre inexistant ! ***");
+		}
+	}
+	
+	public static void removeBook() {
+		if (bookJob.isCartEmpty()) {
+			throw new RuntimeException("***Votre panier est vide !***");
+		}
+		
+		System.out.println("Saisissez l'ID du livre à supprimer au panier");
+		if(	bookJob.removeFromCart(input())) {
+			System.out.println("Le livre a bien été supprimé du panier");
+			displayCart();
+		} else {
+			throw new RuntimeException("***Ce livre ne figure pas dans votre panier !***");
+		}
+	}
+
+	public static void displayCart() {
+		if (bookJob.isCartEmpty()) {
+			throw new RuntimeException("***Votre panier est vide !***");
+		}
+
+		System.out.format(AppUtils.lineCart);
+		System.out.format(AppUtils.headerCart);
+		System.out.format(AppUtils.lineCart);
+		for (Book book : bookJob.getCart()) {
+			double qty = book.getPrice() * book.getQuantity();
+			System.out.format(AppUtils.formatCart, book.getId(),
+					book.getTitle() + " - " + book.getAuthor() + " - " + book.getPublishYear(), book.getPrice(),
+					book.getQuantity(), qty);
+		}
+		System.out.format(AppUtils.lineCart);
+		System.out.println();
+
 	}
 
 	public static void displayBooks() {
