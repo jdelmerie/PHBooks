@@ -79,6 +79,11 @@ public class IBusinessBookImpl implements IBusinessBook {
 	}
 
 	@Override
+	public Thematic getOneThematic(int id) {
+		return thematicDao.read(id);
+	}
+	
+	@Override
 	public boolean order(int custormerId) {
 		if (customerDao.read(custormerId) != null) {
 			double totalAmount = getTotal();
@@ -110,10 +115,7 @@ public class IBusinessBookImpl implements IBusinessBook {
 		return customer;
 	}
 
-	public Thematic getOneThematic(int id) {
-		return thematicDao.read(id);
-	}
-
+	
 	public boolean isCartEmpty() {
 		return cart.isEmpty();
 	}

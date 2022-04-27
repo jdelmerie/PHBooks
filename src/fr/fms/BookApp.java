@@ -26,7 +26,6 @@ public class BookApp {
 				switch (choice = input()) {
 				case 1:
 					addBook();
-
 					break;
 				case 2:
 					removeBook();
@@ -44,25 +43,32 @@ public class BookApp {
 					displayBooksByThematic();
 					break;
 				case 7:
-					System.out.println("connexion");
+					login();
 					break;
 				case 8:
-					System.out.println("déconnexion");
+					System.out.println("Bye, à bientôt");
 					break;
 				default:
 					System.out.println("Mauvaise saisie, recommencez !");
 				}
 			} catch (Exception e) {
+				System.out.println();
 				System.out.println(e.getMessage());
+				System.out.println();
 			}
 		}
 	}
 
 	public static void displayMenu() {
 		if (login != null) {
-			System.out.println("COMPTE : " + login);
+			System.out.println();
+			System.out.println("Compte de " + login);
 		}
-		System.out.println("Que souhaitez-vous faire ? [Saisir le chiffre correspondant]");
+
+		System.out.println(AppUtils.formatMenuWelcome);
+		System.out.println("|                            Menu principal                            |");
+		System.out.println("|      Que souhaitez-vous faire ? [Saisir le chiffre correspondant]    |");
+		System.out.println(AppUtils.formatMenuWelcome);
 		System.out.println("[1] - Ajouter un livre au panier");
 		System.out.println("[2] - Supprimer un livre du panier");
 		System.out.println("[3] - Afficher le panier et passer commande");
@@ -71,6 +77,7 @@ public class BookApp {
 		System.out.println("[6] - Afficher les articles par thématique");
 		System.out.println("[7] - Connexion à votre compte");
 		System.out.println("[8] - Quitter l'application");
+		System.out.println(AppUtils.formatMenuWelcome);
 	}
 
 	public static void addBook() {
@@ -214,7 +221,9 @@ public class BookApp {
 		}
 	}
 
+
 	public static void login() {
+		System.out.println();
 		if (login != null) {
 			System.out.println("***Vous êtes déjà connecté !***");
 			System.out.println();
@@ -235,6 +244,9 @@ public class BookApp {
 		}
 	}
 
+	/**
+	 * Méthode qui permet à l'utilisateur de se créer un compte
+	 */
 	public static void signin() {
 		System.out.println("Saississez les informations suivantes pour créer votre compte :");
 		System.out.println("Prénom");
@@ -252,18 +264,23 @@ public class BookApp {
 			System.out.println("Votre compte a bien été crée.");
 			login();
 		}
-
 	}
 
+	/**
+	 * Méthode qui affiche un message de bienvenue à l'application
+	 */
 	private static void welcome() {
-		System.out.println("+----------------------------------------------------------------------+");
+		System.out.println(AppUtils.formatMenuWelcome);
 		System.out.println("|                                                                      |");
 		System.out.println("|           Bonjour et bienvenue dans la librarie PH BOOKS !           |");
 		System.out.println("|                                                                      |");
-		System.out.println("+----------------------------------------------------------------------+");
+		System.out.println(AppUtils.formatMenuWelcome);
 		System.out.println();
 	}
 
+	/*
+	 *  Méthode qui retourne une chaine de caracètre ca saisie au scanner
+	 */
 	private static String inputStr() {
 		String str;
 		while (scan.hasNextLine() == false)
@@ -272,6 +289,10 @@ public class BookApp {
 		return str;
 	}
 
+	/**
+	 * Méthode qui retourne un entier saisi au scanner
+	 * @return
+	 */
 	private static int input() {
 		int choice;
 		while (scan.hasNextInt() == false)

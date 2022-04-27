@@ -1,6 +1,4 @@
 package fr.fms.dao;
-
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +15,6 @@ public class OrderDao implements Dao<Order> {
 		try (PreparedStatement pStatement = connection.prepareStatement(add, Statement.RETURN_GENERATED_KEYS)) {
 			pStatement.setDouble(1, obj.getTotalAmount());
 			pStatement.setDate(2, new java.sql.Date(obj.getDate().getTime()));
-//			pStatement.setDate(2, obj.getDate());
 			pStatement.setInt(3, obj.getCustomerId());
 			pStatement.executeUpdate();
 			try (ResultSet generatedKeySet = pStatement.getGeneratedKeys()) {

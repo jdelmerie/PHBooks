@@ -39,20 +39,27 @@ public abstract interface IBusinessBook {
 	public boolean removeFromCart(int id);
 	
 	/**
-	 * Méthode qui retourne la liste des livres du panier
+	 * Méthode qui retourne la liste des livres qui se trouvent dans le panier
 	 * @return
 	 */
 	public ArrayList<Book> getCart();
 	
 	/**
-	 * Méthode qui retourne un livre correspondant à l'id
+	 * Méthode qui retourne un livre correspondant à l'id passé en param
 	 * @param id
-	 * @return
+	 * @return 
 	 */
 	public Book getOneBook(int id);
 	
 	/**
-	 * Méthode qui permet d'envoyer la commande en base de donnée
+	 * Méthode qui retourne une thématique correspond à l'id passé en param
+	 * @param id
+	 * @return
+	 */
+	public Thematic getOneThematic(int id);
+	
+	/**
+	 * Méthode qui permet d'envoyer la commande en base de données
 	 * 
 	 * @param custormerId
 	 * @return true si tout s'est bien passé, sinon false

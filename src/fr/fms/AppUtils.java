@@ -13,4 +13,6 @@ public class AppUtils {
 	public static String lineCart =   "+------+------------------------------------------------+------+----------+--------+%n";
 	public static String headerCart = "| ID   | DETAILS                                        | P U  | QUANTITY | TOTAL  |%n";
 	public static String footerCart = "| %-46s                          | %-6s | %n";
+	
+	public static String formatMenuWelcome = "+----------------------------------------------------------------------+";
 }
