@@ -15,7 +15,7 @@ public class BookDao implements Dao<Book> {
 		try (PreparedStatement pStatement = connection.prepareStatement(add)) {
 			pStatement.setString(1, obj.getTitle());
 			pStatement.setString(2, obj.getAuthor());
-			pStatement.setInt(3, obj.getPublishYearDate());
+			pStatement.setInt(3, obj.getPublishYear());
 			pStatement.setDouble(4, obj.getPrice());
 			pStatement.setBoolean(5, obj.isState());
 			if (pStatement.executeUpdate() == 1) {
@@ -56,7 +56,7 @@ public class BookDao implements Dao<Book> {
 		try (PreparedStatement pStatement = connection.prepareStatement(update)) {
 			pStatement.setString(1, obj.getTitle());
 			pStatement.setString(2, obj.getAuthor());
-			pStatement.setInt(3, obj.getPublishYearDate());
+			pStatement.setInt(3, obj.getPublishYear());
 			pStatement.setDouble(4, obj.getPrice());
 			pStatement.setBoolean(5, obj.isState());
 			pStatement.setInt(6, obj.getId());

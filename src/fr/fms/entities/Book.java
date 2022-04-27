@@ -4,41 +4,41 @@ public class Book {
 	private int id;
 	private String title;
 	private String author;
-	private int publishYearDate;
+	private int publishYear;
 	private int quantity = 1;
 	private double price;
 	private boolean state; // true = new - false = old
 
-	public Book(int id, String title, String author, int publishYearDate, int quantity, double price, boolean state) {
+	public Book(int id, String title, String author, int publishYear, int quantity, double price, boolean state) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.publishYearDate = publishYearDate;
+		this.publishYear = publishYear;
 		setQuantity(quantity);
 		this.price = price;
 		this.state = state;
 	}
 	
-	public Book(String title, String author, int publishYearDate, int quantity, double price, boolean state) {
+	public Book(String title, String author, int publishYear, int quantity, double price, boolean state) {
 		this.title = title;
 		this.author = author;
-		this.publishYearDate = publishYearDate;
+		this.publishYear = publishYear;
 		setQuantity(quantity);
 		this.price = price;
 		this.state = state;
 	}
 	
-	public Book(String title, String author, int publishYearDate, double price, boolean state) {
+	public Book(String title, String author, int publishYear, double price, boolean state) {
 		this.title = title;
 		this.author = author;
-		this.publishYearDate = publishYearDate;
+		this.publishYear = publishYear;
 		this.price = price;
 		this.state = state;
 	}
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", publishYearDate=" + publishYearDate
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", publishYear=" + publishYear
 				+ ", quantity=" + quantity + ", price=" + price + ", state=" + state + "]";
 	}
 
@@ -66,12 +66,12 @@ public class Book {
 		this.author = author;
 	}
 
-	public int getPublishYearDate() {
-		return publishYearDate;
+	public int getPublishYear() {
+		return publishYear;
 	}
 
-	public void setPublishYearDate(int publishYearDate) {
-		this.publishYearDate = publishYearDate;
+	public void setPublishYear(int publishYear) {
+		this.publishYear = publishYear;
 	}
 
 	public int getQuantity() {

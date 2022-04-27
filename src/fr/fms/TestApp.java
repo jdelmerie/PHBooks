@@ -1,14 +1,12 @@
 package fr.fms;
 
-import fr.fms.dao.BookDao;
-import fr.fms.dao.ThematicDao;
-import fr.fms.entities.Book;
+import fr.fms.business.IBusinessBookImpl;
 
 public class TestApp {
 
 	public static void main(String[] args) {
 
-		BookDao bookDao = new BookDao();
+//		BookDao bookDao = new BookDao();
 //
 //		System.out.println("All books");
 //		bookDao.selectAll().forEach(book -> System.out.println(book));
@@ -20,11 +18,14 @@ public class TestApp {
 //		
 //		bookDao.delete(book);
 		
-		ThematicDao thematicDao = new ThematicDao();
+//		ThematicDao thematicDao = new ThematicDao();
+//		
+//		thematicDao.selectAll().forEach(th -> System.out.println(th));
+//		bookDao.selectAllByThematic(2
+//				).forEach(test -> System.out.println(test));
 		
-		thematicDao.selectAll().forEach(th -> System.out.println(th));
-		bookDao.selectAllByThematic(2
-				).forEach(test -> System.out.println(test));
+		IBusinessBookImpl bookJob = new IBusinessBookImpl();
+		bookJob.selectAllBooks().forEach(book -> System.out.println(book));
 
 	}
 
