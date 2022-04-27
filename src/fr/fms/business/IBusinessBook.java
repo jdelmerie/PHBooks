@@ -2,6 +2,7 @@ package fr.fms.business;
 
 import java.util.ArrayList;
 import fr.fms.entities.Book;
+import fr.fms.entities.Customer;
 import fr.fms.entities.Thematic;
 
 public abstract interface IBusinessBook {
@@ -32,7 +33,8 @@ public abstract interface IBusinessBook {
 	
 	/**
 	 * Méthode qui permet de supprimer un livre du panier
-	 * @param book
+	 * @param id
+	 * @return true si tout s'est bien passé, sinon false
 	 */
 	public boolean removeFromCart(int id);
 	
@@ -49,4 +51,18 @@ public abstract interface IBusinessBook {
 	 */
 	public Book getOneBook(int id);
 	
+	/**
+	 * Méthode qui permet d'envoyer la commande en base de donnée
+	 * 
+	 * @param custormerId
+	 * @return true si tout s'est bien passé, sinon false
+	 */
+	public boolean order(int custormerId);
+	
+	/**
+	 * Méthode qui permet de créer un compte client
+	 * @param customer
+	 * @return true si tout s'est passé, sinon false
+	 */
+	public boolean createCustomerAccount(Customer customer);
 }

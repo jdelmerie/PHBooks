@@ -16,11 +16,25 @@ public class Customer extends User {
 		setPhone(phone);
 	}
 
-	public Customer(int id, String email, String password, String firstname, String lastname, String address) {
-		super(id, email, password);
+	public Customer(String email, String password, String firstname, String lastname, String address, String phone) {
+		super(email, password);
 		setFirstname(firstname);
 		setLastname(lastname);
 		setAddress(address);
+		setPhone(phone);
+	}
+
+	public Customer(String email, String password, String firstname, String lastname, String address) {
+		super(email, password);
+		setFirstname(firstname);
+		setLastname(lastname);
+		setAddress(address);
+	}
+	
+	public Customer(String email, String password, String firstname, String lastname) {
+		super(email, password);
+		setFirstname(firstname);
+		setLastname(lastname);
 	}
 
 	@Override

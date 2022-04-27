@@ -1,6 +1,8 @@
 package fr.fms;
 
 import fr.fms.business.IBusinessBookImpl;
+import fr.fms.dao.CustomerDao;
+import fr.fms.entities.Customer;
 
 public class TestApp {
 
@@ -25,8 +27,19 @@ public class TestApp {
 //				).forEach(test -> System.out.println(test));
 		
 		IBusinessBookImpl bookJob = new IBusinessBookImpl();
-		bookJob.selectAllBooks().forEach(book -> System.out.println(book));
-
+//		bookJob.selectAllBooks().forEach(book -> System.out.println(book));
+		
+//		CustomerDao customerDao = new CustomerDao();
+//		customerDao.selectAll().forEach(cus -> System.out.println(cus));
+////		customerDao.create(new Customer("delmerie@jr.com", "del123", "delmerie", "john rose", "5 rue de Gaillac"));
+////		Customer delCustomer = customerDao.read(2);
+////		System.out.println("avant maj : " + delCustomer);
+////		delCustomer.setPhone("0123456789");
+////		customerDao.update(delCustomer);
+////		System.out.println("apres maj : " + customerDao.read(2));
+//		customerDao.delete(customerDao.read(7));
+//		System.out.println("après supp");
+//		customerDao.selectAll().forEach(cus -> System.out.println(cus));
 	}
 
 }
