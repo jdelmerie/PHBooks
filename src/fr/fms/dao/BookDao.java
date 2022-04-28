@@ -7,6 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import fr.fms.entities.Book;
 
+/**
+ * Composant d'accès aux données de la table t_books dans la base de données phbooks
+ * @author Delmerie JOHN ROSE
+ *
+ */
 public class BookDao implements Dao<Book> {
 
 	@Override
@@ -106,6 +111,11 @@ public class BookDao implements Dao<Book> {
 		return books;
 	}
 
+	/**
+	 * Méthode qui permet de sélectionner tous les livres correspond à une thématique
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<Book> selectAllByThematic(int id) {
 		ArrayList<Book> books = new ArrayList<Book>();
 		String query = "select * from t_books inner join t_booksbythematics on t_booksbythematics.bookid = t_books.id where t_booksbythematics.thematicid = ?;";

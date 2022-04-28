@@ -1,29 +1,33 @@
 package fr.fms;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import fr.fms.business.IBusinessBookImpl;
 import fr.fms.entities.Book;
 import fr.fms.entities.Customer;
 import fr.fms.entities.Thematic;
 
+/**
+ * Application de console d'achat de livres L'utilisateur peut ajouter et
+ * supprimer des livres du panier ainsi que passer commande à tout moment Pour
+ * passer commande, l'utilisateur doit être connecté, s'il n'a pas de compte, il
+ * a la possibilité d'en créer un
+ * 
+ * @author Delmerie JOHN ROSE
+ *
+ */
 public class BookApp {
 
-	private static Scanner scan = new Scanner(System.in);
 	private static IBusinessBookImpl bookJob = new IBusinessBookImpl();
 	private static int customerId = 0;
 	private static String login = null;
 
 	public static void main(String[] args) {
-
 		welcome();
-
 		int choice = 0;
-
 		while (choice != 8) {
 			try {
 				displayMenu();
-				switch (choice = input()) {
+				switch (choice = AppUtils.input()) {
 				case 1:
 					addBook();
 					break;
@@ -53,12 +57,29 @@ public class BookApp {
 				}
 			} catch (Exception e) {
 				System.out.println();
+				System.out.println("-------------------------------------------------");
 				System.out.println(e.getMessage());
+				System.out.println("-------------------------------------------------");
 				System.out.println();
 			}
 		}
 	}
 
+	/**
+	 * Méthode qui affiche un message de bienvenue à l'application
+	 */
+	private static void welcome() {
+		System.out.println(AppUtils.formatMenuWelcome);
+		System.out.println("|                                                                      |");
+		System.out.println("|           Bonjour et bienvenue dans la librarie PH BOOKS !           |");
+		System.out.println("|                                                                      |");
+		System.out.println(AppUtils.formatMenuWelcome);
+		System.out.println();
+	}
+
+	/**
+	 * Méthode qui permet d'afficher le menu principal
+	 */
 	public static void displayMenu() {
 		if (login != null) {
 			System.out.println();
@@ -77,37 +98,46 @@ public class BookApp {
 		System.out.println("[6] - Afficher les articles par thématique");
 		System.out.println("[7] - Connexion à votre compte");
 		System.out.println("[8] - Quitter l'application");
-		System.out.println(AppUtils.formatMenuWelcome);
 	}
 
+	/**
+	 * Méthode qui permet à l'utilisateur d'ajouter un livre au panier
+	 */
 	public static void addBook() {
 		displayBooks();
 		System.out.println("Saisissez l'ID du livre à ajouter au panier");
-		int id = input();
+		int id = AppUtils.input();
 		Book book = bookJob.getOneBook(id);
 
 		if (book != null) {
 			bookJob.addToCart(book);
 			displayCart(false);
 		} else {
-			throw new RuntimeException("*** Vous demandez un livre inexistant ! ***");
+			throw new RuntimeException("Vous demandez un livre inexistant !");
 		}
 	}
 
+	/**
+	 * Méthode qui permet à l'utilisateur de supprimer un livre du panier
+	 */
 	public static void removeBook() {
 		if (bookJob.isCartEmpty()) {
-			throw new RuntimeException("***Votre panier est vide !***");
+			throw new RuntimeException("Votre panier est vide !");
 		}
 
 		System.out.println("Saisissez l'ID du livre à supprimer au panier");
-		if (bookJob.removeFromCart(input())) {
+		if (bookJob.removeFromCart(AppUtils.input())) {
 			System.out.println("Le livre a bien été supprimé du panier");
 			displayCart(false);
 		} else {
-			throw new RuntimeException("***Ce livre ne figure pas dans votre panier !***");
+			throw new RuntimeException("Ce livre ne figure pas dans votre panier !");
 		}
 	}
 
+	/**
+	 * Méthode qui permet d'afficher la liste de l'ensemble des livres de la
+	 * boutique
+	 */
 	public static void displayBooks() {
 		ArrayList<Book> books = bookJob.selectAllBooks();
 
@@ -124,6 +154,9 @@ public class BookApp {
 		System.out.println();
 	}
 
+	/**
+	 * Méthode qui permet d'afficher la liste des thématiques
+	 */
 	public static void displayThematics() {
 		ArrayList<Thematic> thematics = bookJob.selectThematics();
 
@@ -137,16 +170,20 @@ public class BookApp {
 		System.out.println();
 	}
 
+	/**
+	 * Méthode qui permet d'afficher la liste des livres selon une thématique
+	 * choisie par l'utilisateur
+	 */
 	public static void displayBooksByThematic() {
 		System.out.println("Saisissez l'ID du thématique que vous souhaitez : ");
-		int id = input();
+		int id = AppUtils.input();
 		Thematic thematic = bookJob.getOneThematic(id);
 
 		if (thematic != null) {
 			ArrayList<Book> books = bookJob.selectAllBooksByThematic(id);
 
 			if (books.isEmpty()) {
-				throw new RuntimeException("***Il n'y a pas (encore) de livres associés à cette thématique !\n***");
+				throw new RuntimeException("Il n'y a pas (encore) de livres associés à cette thématique !");
 			}
 
 			System.out.println("Thématique : " + thematic.getName());
@@ -162,13 +199,18 @@ public class BookApp {
 			System.out.format(AppUtils.lineBook);
 			System.out.println();
 		} else {
-			throw new RuntimeException("***Vous demandez une thématique inexistante !***");
+			throw new RuntimeException("Vous demandez une thématique inexistante !");
 		}
 	}
 
+	/**
+	 * Méthode qui permet d'afficher le panier Affiche le total selon le flag
+	 * 
+	 * @param flag
+	 */
 	public static void displayCart(boolean flag) {
 		if (bookJob.isCartEmpty()) {
-			throw new RuntimeException("***Votre panier est vide !***");
+			throw new RuntimeException("Votre panier est vide !");
 		}
 
 		System.out.format(AppUtils.lineCart);
@@ -187,20 +229,25 @@ public class BookApp {
 			System.out.println();
 			validateOrder();
 		}
-
 	}
 
-	private static void validateOrder() {
+	/**
+	 * Méthode qui permet de valider une commande Propose à l'utilisateur de se
+	 * connecter ou de se créer un compte pour passer commande
+	 * 
+	 */
+	public static void validateOrder() {
 		System.out.println("Souhaitez-vous passer commande ? [Oui/Non] ");
 
-		if (inputStr().equalsIgnoreCase("oui")) {
+		if (AppUtils.inputStr().equalsIgnoreCase("oui")) {
 
+			// si un login n'existe pas, on propose de se connecter ou de se créer un compte
 			if (login == null) {
 				System.out.println("Vous devez avoir un compte pour continuer !");
-				System.out.println("1 - Se connecter");
-				System.out.println("2 - S'inscrire");
+				System.out.println("[1] - Se connecter");
+				System.out.println("[2] - S'inscrire");
 
-				switch (input()) {
+				switch (AppUtils.input()) {
 				case 1:
 					login();
 					break;
@@ -210,9 +257,11 @@ public class BookApp {
 				default:
 					break;
 				}
-			} else {
+			} else { // si le login existe, la commade se poursuit
 				if (bookJob.order(customerId)) {
-					System.out.println("Votre commande a bien été validée.");
+					System.out.println("+------------------------------------+");
+					System.out.println("| Votre commande a bien été validée. |");
+					System.out.println("+------------------------------------+");
 					bookJob.clearCart();
 				} else {
 					System.out.println("Une erreur s'est produite au moment de passer la commande.");
@@ -221,22 +270,26 @@ public class BookApp {
 		}
 	}
 
-
+	/**
+	 * Méthode qui permet à l'utisateur de se connecter
+	 */
 	public static void login() {
-		System.out.println();
 		if (login != null) {
-			System.out.println("***Vous êtes déjà connecté !***");
-			System.out.println();
+			System.out.println("+---------------------------+");
+			System.out.println("| Vous êtes déjà connecté ! |");
+			System.out.println("+---------------------------+");
 		} else {
 			System.out.println("Saississez votre email");
-			String email = inputStr();
+			String email = AppUtils.inputStr();
 			System.out.println("Saississez votre mot de passe");
-			String password = inputStr();
+			String password = AppUtils.inputStr();
 
 			Customer customer = bookJob.existCustomer(email, password);
 
 			if (customer != null) {
-				login = customer.getFirstname() + " " + customer.getLastname();
+				String fistnameString = customer.getFirstname();
+				login = fistnameString.substring(0, 1).toUpperCase() + fistnameString.substring(1) + " "
+						+ customer.getLastname().toUpperCase();
 				customerId = customer.getId();
 			} else {
 				signin();
@@ -250,54 +303,21 @@ public class BookApp {
 	public static void signin() {
 		System.out.println("Saississez les informations suivantes pour créer votre compte :");
 		System.out.println("Prénom");
-		String firstname = inputStr();
+		String firstname = AppUtils.inputStr();
 		System.out.println("Nom");
-		String lastname = inputStr();
+		String lastname = AppUtils.inputStr();
 		System.out.println("Email");
-		String email = inputStr();
+		String email = AppUtils.inputStr();
 		System.out.println("Mot de passe");
-		String password = inputStr();
+		String password = AppUtils.inputStr();
 
 		Customer newCustomer = new Customer(email, password, firstname, lastname);
 
 		if (bookJob.createCustomerAccount(newCustomer)) {
-			System.out.println("Votre compte a bien été crée.");
+			System.out.println("+-------------------------------+");
+			System.out.println("| Votre compte a bien été crée. |");
+			System.out.println("+-------------------------------+");
 			login();
 		}
-	}
-
-	/**
-	 * Méthode qui affiche un message de bienvenue à l'application
-	 */
-	private static void welcome() {
-		System.out.println(AppUtils.formatMenuWelcome);
-		System.out.println("|                                                                      |");
-		System.out.println("|           Bonjour et bienvenue dans la librarie PH BOOKS !           |");
-		System.out.println("|                                                                      |");
-		System.out.println(AppUtils.formatMenuWelcome);
-		System.out.println();
-	}
-
-	/*
-	 *  Méthode qui retourne une chaine de caracètre ca saisie au scanner
-	 */
-	private static String inputStr() {
-		String str;
-		while (scan.hasNextLine() == false)
-			scan.next();
-		str = scan.next();
-		return str;
-	}
-
-	/**
-	 * Méthode qui retourne un entier saisi au scanner
-	 * @return
-	 */
-	private static int input() {
-		int choice;
-		while (scan.hasNextInt() == false)
-			scan.next();
-		choice = scan.nextInt();
-		return choice;
 	}
 }

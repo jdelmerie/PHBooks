@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 import fr.fms.entities.OrderItem;
 
+/**
+ * Composant d'accès aux données de la table t_ordersitems dans la base de données phbooks
+ * @author Delmerie JOHN ROSE
+ *
+ */
 public class OrderItemDao implements Dao<OrderItem> {
 
 	@Override

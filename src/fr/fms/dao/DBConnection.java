@@ -6,6 +6,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Gestion de la connexion à la base à partir des données grace au fichier config.properties
+ * @author Delmerie JOHN ROSE
+ *
+ */
 public class DBConnection {
 	private static Connection connection = null;
 	private static Properties prop;

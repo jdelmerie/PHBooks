@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 import fr.fms.entities.Thematic;
 
+/**
+ * Composant d'accès aux données de la table t_thematics dans la base de données phbooks
+ * @author Delmerie JOHN ROSE
+ *
+ */
 public class ThematicDao implements Dao<Thematic> {
 
 	@Override

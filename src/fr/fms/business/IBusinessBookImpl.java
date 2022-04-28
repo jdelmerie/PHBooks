@@ -104,6 +104,12 @@ public class IBusinessBookImpl implements IBusinessBook {
 		return customerDao.create(customer);
 	}
 
+	/**
+	 * Méthode qui permet de vérifier si un client existe à la connexion 
+	 * @param email
+	 * @param password
+	 * @return un obj customer si trouvé, sinon null
+	 */
 	public Customer existCustomer(String email, String password) {
 		Customer customer = null;
 		for (Customer cus : customerDao.selectAll()) {
@@ -115,18 +121,28 @@ public class IBusinessBookImpl implements IBusinessBook {
 		return customer;
 	}
 
-	
+	/**
+	 * Méthode qui vérifie si le panier est vide
+	 * @return true si c'est vide et false dans le cas contraire
+	 */
 	public boolean isCartEmpty() {
 		return cart.isEmpty();
 	}
 
+	/**
+	 * Méthode qui permet de vider le panier
+	 */
 	public void clearCart() {
 		cart.clear();
 	}
 
+	/**
+	 * Méthode qui permet de calculer le montant total d'un panier
+	 * @return le montant total d'un panier 
+	 */
 	public double getTotal() {
 		double total = 0;
-		for (Book book : cart.values()) {
+		for (Book book : getCart()) {
 			total += book.getPrice() * book.getQuantity();
 		}
 		return total;

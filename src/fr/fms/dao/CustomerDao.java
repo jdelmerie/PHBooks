@@ -7,6 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import fr.fms.entities.Customer;
 
+/**
+ * Composant d'accès aux données de la table t_customers dans la base de données phbooks
+ * @author Delmerie JOHN ROSE
+ *
+ */
 public class CustomerDao implements Dao<Customer> {
 
 	@Override

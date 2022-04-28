@@ -1,5 +1,7 @@
 package fr.fms;
 
+import java.util.Scanner;
+
 public class AppUtils {
 	public static String formatBook = "| %-4d | %-50s | %-35s| %-5s | %-5s    | %-10s | %n";
 	public static String lineBook =   "+------+----------------------------------------------------+------------------------------------+-------+----------+------------+%n";
@@ -15,4 +17,30 @@ public class AppUtils {
 	public static String footerCart = "| %-46s                          | %-6s | %n";
 	
 	public static String formatMenuWelcome = "+----------------------------------------------------------------------+";
+	
+	public static Scanner scan = new Scanner(System.in);
+	
+	/*
+	 * Méthode qui retourne une chaine de caracètre ca saisie au scanner
+	 */
+	public static String inputStr() {
+		String str;
+		while (scan.hasNextLine() == false)
+			scan.next();
+		str = scan.next();
+		return str;
+	}
+
+	/**
+	 * Méthode qui retourne un entier saisi au scanner
+	 * 
+	 * @return
+	 */
+	public static int input() {
+		int choice;
+		while (scan.hasNextInt() == false)
+			scan.next();
+		choice = scan.nextInt();
+		return choice;
+	}
 }
