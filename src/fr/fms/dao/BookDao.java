@@ -49,7 +49,7 @@ public class BookDao implements Dao<Book> {
 				book = new Book(res.getInt(1), title, author, date, quantity, price, state);
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 
 		return book;
@@ -69,7 +69,7 @@ public class BookDao implements Dao<Book> {
 				return true;
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return false;
 	}
@@ -83,7 +83,7 @@ public class BookDao implements Dao<Book> {
 				return true;
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return false;
 	}
@@ -106,7 +106,7 @@ public class BookDao implements Dao<Book> {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return books;
 	}
@@ -133,7 +133,7 @@ public class BookDao implements Dao<Book> {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return books;
 	}

@@ -24,7 +24,7 @@ public class ThematicDao implements Dao<Thematic> {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return false;
 	}
@@ -41,7 +41,7 @@ public class ThematicDao implements Dao<Thematic> {
 				thematic = new Thematic(id, name);
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return thematic;
 	}
@@ -55,7 +55,7 @@ public class ThematicDao implements Dao<Thematic> {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return false;
 	}
@@ -69,7 +69,7 @@ public class ThematicDao implements Dao<Thematic> {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return false;
 	}
@@ -87,7 +87,7 @@ public class ThematicDao implements Dao<Thematic> {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return thematics;
 	}

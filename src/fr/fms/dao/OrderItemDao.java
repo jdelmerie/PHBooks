@@ -25,7 +25,7 @@ public class OrderItemDao implements Dao<OrderItem> {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return false;
 	}

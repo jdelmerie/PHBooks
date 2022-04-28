@@ -28,7 +28,7 @@ public class CustomerDao implements Dao<Customer> {
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return false;
 	}
@@ -51,7 +51,7 @@ public class CustomerDao implements Dao<Customer> {
 				customer = new Customer(id, email, password, firstname, lastname, address, phone);
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 
 		return customer;
@@ -71,7 +71,7 @@ public class CustomerDao implements Dao<Customer> {
 				return true;
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return false;
 	}
@@ -85,7 +85,7 @@ public class CustomerDao implements Dao<Customer> {
 				return true;
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return false;
 	}
@@ -108,7 +108,7 @@ public class CustomerDao implements Dao<Customer> {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return customers;
 	}
